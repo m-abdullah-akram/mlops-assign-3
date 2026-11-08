@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Is this image real or AI-generated?</h1>
+<p class="lede">Upload a JPG or PNG up to {{ '%g' % max_mb }} MB. The image is analysed in memory and is not stored.</p>
+<form class="drop" method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+  <label for="file">Choose an image</label>
+  <input id="file" type="file" name="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required>
+  <button type="submit">Check image</button>
+</form>
+{% endblock %}

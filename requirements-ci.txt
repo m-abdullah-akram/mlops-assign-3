@@ -1,0 +1,10 @@
+# CI installs only what the tests need (the tests use a fake model, so no TensorFlow).
+flask==3.0.3
+pillow==10.3.0
+numpy
+pandas
+scikit-learn
+requests
+psycopg2-binary
+pytest
+flake8

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Result - VisionGuard{% endblock %}
+{% block content %}
+<h1>Result for <span class="fname">{{ filename }}</span></h1>
+<section class="result">
+  <img class="preview" src="{{ preview }}" alt="Uploaded image preview">
+  <div>
+    <p class="verdict {{ r.label }}">{{ 'Likely AI-generated' if r.label == 'ai' else 'Likely a real photo' }}</p>
+    <div class="meter" role="img" aria-label="Confidence {{ '%.1f' % (r.confidence * 100) }} percent">
+      <span class="{{ r.label }}" style="width: {{ '%.1f' % (r.confidence * 100) }}%"></span>
+    </div>
+    <p class="conf">{{ '%.1f' % (r.confidence * 100) }}% confidence</p>
+    <dl>
+      <dt>Probability it is AI</dt><dd>{{ '%.3f' % r.prob_ai }}</dd>
+      <dt>Decision threshold</dt><dd>{{ '%.2f' % r.threshold }}</dd>
+      <dt>Model</dt><dd>{{ r.model_name }} (version {{ r.model_version }})</dd>
+      <dt>Time taken</dt><dd>{{ r.latency_ms }} ms</dd>
+    </dl>
+  </div>
+</section>
+<p class="caveat"><strong>Keep in mind.</strong> {{ caveat }}</p>
+<p><a class="btn" href="{{ url_for('index') }}">Check another image</a>
+   <a href="{{ url_for('history') }}">View history</a></p>
+{% endblock %}

@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+mlruns/
+outputs/
+instance/
+*.db
+.pytest_cache/
+# the dataset is tracked by DVC (dvc add adds its own ignore entry); the exported model is not in Git
+/models/champion

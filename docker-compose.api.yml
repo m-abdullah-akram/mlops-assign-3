@@ -1,0 +1,18 @@
+# Cloud model API (Task 7): run on the VM with  docker compose -f docker-compose.api.yml up -d --build
+name: ${COMPOSE_PROJECT_NAME:-22l_6632_a2_ops}_api
+
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    command: ["flask", "--app", "api.api_server:create_api", "run", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      API_KEY: ${API_KEY}
+      MODEL_PATH: /models/champion/model.keras
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-5}
+      FLASK_DEBUG: "0"
+      PORT: "8000"
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "8000:8000"
